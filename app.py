@@ -98,7 +98,7 @@ def odd():
 def trigonometry():
     return render_template('trigonometry.html')
 
-@app.route('/trig', methods=['POST'])
+@app.route('/trigonometry', methods=['POST'])
 def trig():
      trig = request.form['trig']
      x = float(request.form['x'])
@@ -115,7 +115,7 @@ def trig():
         error_message = f"{trig} trig not operable, try 'sin', 'cos', or 'tan'"
         return render_template('trigonometry.html', error_message=error_message)
 
-     return render_template('trigonometry.html', result=result)
+     return render_template('result.html', result=result)
 
 @app.route('/blog')
 def blog():
