@@ -98,7 +98,7 @@ def odd():
 def trigonometry():
     return render_template('trigonometry.html')
 
-app.route('/trig', methods=['POST'])
+@app.route('/trig', methods=['POST'])
 def trig():
      trig = request.form['trig']
      x = float(request.form['x'])
