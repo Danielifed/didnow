@@ -1,0 +1,11 @@
+{% extends 'layout.html' %} 
+
+{% block body %} 
+    <h1>Trigonometry Calculator</h1>
+    <form action="/trigonometry" method="POST">
+        <input type="text" name="trig" placeholder="Enter trigonometry function (sin, cos, or tan)" required><br>
+        <input type="number" name="x" placeholder="Enter a figure" required><br>
+        <input type="number" name="y" placeholder="Enter a figure" required><br>
+        <button type="submit">Calculate</button>
+    </form>
+{% endblock %}

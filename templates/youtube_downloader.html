@@ -1,0 +1,27 @@
+{% extends 'layout.html' %} 
+
+{% block body %}
+     <h1>YouTube Downloader</h1>
+    <form action="/youtube_downloader" method="POST">
+        <label for="url">YouTube URL:</label><br>
+        <input type="text" id="url" name="url" required><br>
+
+        <label for="save_path">Save Path:</label><br>
+        <input type="text" id="save_path" name="save_path" value="download_folder" required><br>
+
+        <label for="itag">Desired Format:</label><br>
+        <select id="itag" name="itag" required>
+            {% for format in formats %}
+                <option value="{{ format.itag }}">{{ format.resolution }} - {{ format.mime_type }}</option>
+            {% endfor %}
+        </select><br>
+
+        <input type="checkbox" id="audio_format" name="audio_format">
+        <label for="audio_format">Download as MP3</label><br>
+
+        <button type="submit">Download</button>
+    </form>
+    {% if status %}
+        <p>{{ status }}</p>
+    {% endif %}
+{% endblock %}

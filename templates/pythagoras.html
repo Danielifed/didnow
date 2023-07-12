@@ -1,0 +1,12 @@
+{% extends 'layout.html' %} 
+
+{% block body %}
+ <h1>Pythagoras Calculator</h1>
+    <form action="/pythagoras" method="POST">
+        <input type="text" name="side" placeholder="Enter side (hyp, adj, or opp)" required><br>
+        <input type="number" name="a" placeholder="Enter number for side a" required><br>
+        <input type="number" name="b" placeholder="Enter number for side b" required><br>
+        <button type="submit">Calculate</button>
+    </form>
+    
+{% endblock %}
