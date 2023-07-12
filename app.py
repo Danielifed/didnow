@@ -199,6 +199,9 @@ def register():
 
         #close connection
         cur.close()
+        return f"Done!!"
+ 
+app.run(host='localhost', port=5000)
 
         flash('You are now registered and can log in', 'Success')
 
