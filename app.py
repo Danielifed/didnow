@@ -1,10 +1,22 @@
+from pytube import YouTube
 from flask import Flask, render_template, flash, redirect, url_for, session, logging, request
-#from flask_mysqldb import Mysql
+from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 import math
 
 app = Flask(__name__)
+app.secret_key = 'Ifedaniel@0704'
+
+#configure MySQL
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'Ifedaniel@0704'
+app.config['MYSQL_DB'] = 'danielife'
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+
+#init MySQL
+mysql = MySQL(app)
 
 @app.route('/')
 def index():
@@ -101,8 +113,8 @@ def trigonometry():
 @app.route('/trigonometry', methods=['POST'])
 def trig():
      trig = request.form['trig']
-     x = float(request.form['x'])
-     y = float(request.form['y'])
+     x = int(request.form['x'])
+     y = int(request.form['y'])
      result = None
 
      if trig == "sin":
@@ -117,10 +129,82 @@ def trig():
 
      return render_template('result.html', result=result)
 
+@app.route('/youtube_downloader', methods=['GET', 'POST'])
+def youtube_downloader():
+    if request.method == 'POST':
+        url = request.form['url']
+        save_path = request.form.get('save_path', 'download_folder')
+        audio_format = request.form.get('audio_format', False)
+        itag = request.form['itag']
+
+        try:
+            youtube = YouTube(url)
+            formats = youtube.streams.filter(file_extension='mp4')
+
+            # Choose the desired format
+            video = youtube.streams.get_by_itag(itag)
+
+            if video:
+                # Download the video
+                video.download(save_path)
+                status = "Download completed!"
+
+                # Convert to MP3 if audio format is requested
+                if audio_format:
+                    mp3_filename = video.default_filename.replace(video.default_filename[-3:], "mp3")
+                    video.streams.get_audio_only().download(save_path, filename=mp3_filename)
+                    status += " (MP3)"
+            else:
+                status = "Format not found."
+
+        except Exception as e:
+            status = "Download failed."
+            print(e)
+
+        return render_template('youtube_downloader.html', status=status, formats=formats)
+
+    return render_template('youtube_downloader.html', formats=[])  # Provide an empty list as the default value
+
 @app.route('/blog')
 def blog():
     return render_template('blog.html')
-##class RegisterForm(Form):
-    FirstName = StringField('FirstName', [validators.Length(min=1, max=50)])
+
+class RegisterForm(Form):
+    first_name = StringField('First Name', [validators.Length(min=1, max=50)])
+    middle_name = StringField('Middle Name', [validators.Length(min=1, max=50)])
+    last_name = StringField('Last Name', [validators.Length(min=1, max=50)])
+    username = StringField('Username', [validators.Length(min=4, max=25)])
+    email = StringField('Email', [validators.Length(min=5, max=25)])
+    password = PasswordField('Password', [validators.DataRequired(), validators.EqualTo('confirm', message='Passwords do not match')])
+    confirm = PasswordField('Confirm Password')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegisterForm(request.form)
+    if request.method == 'POST' and form.validate():
+        first_name = form.first_name.data
+        middle_name = form.middle_name.data
+        last_name = form.last_name.data
+        username = form.username.data
+        email = form.email.data
+        password = sha256_crypt.encrypt(str(form.password.data))
+
+        # create cursor
+        cur = mysql.connection.cursor()
+
+        cur.execute("INSERT INTO student(first_name, middle_name, last_name,username, email, password) VALUES(%s, %s, %s, %s, %s, %s)", (first_name, middle_name, last_name,username, email, password))
+
+        #commit to DB
+        mysql.connection.commit()
+
+        #close connection
+        cur.close()
+
+        flash('You are now registered and can log in', 'Success')
+
+        redirect(url_for('index'))
+
+    return render_template('register.html', form=form)
+
 if __name__=='__main__':
     app.run(debug=True) 
