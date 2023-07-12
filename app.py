@@ -200,12 +200,11 @@ def register():
         #close connection
         cur.close()
         return f"Done!!"
- 
-app.run(host='localhost', port=5000)
+    app.run(host='localhost', port=5000)
 
-        flash('You are now registered and can log in', 'Success')
+    flash('You are now registered and can log in', 'Success')
 
-        redirect(url_for('index'))
+    redirect(url_for('index'))
 
     return render_template('register.html', form=form)
 
