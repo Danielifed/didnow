@@ -1,3 +1,4 @@
+#libraries to be used
 from pytube import YouTube
 from flask import Flask, render_template, flash, redirect, url_for, session, logging, request
 from flask_mysqldb import MySQL
@@ -18,14 +19,18 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 #init MySQL
 mysql = MySQL(app)
 
+#route to the index
 @app.route('/')
 def index():
     return render_template('index.html')
 
+
+#route to the about page
 @app.route('/about')
 def about():
     return render_template('about.html')
 
+#route to the calculator section
 @app.route('/calculator')
 def calculator():
     return render_template('calculator.html')
@@ -129,6 +134,7 @@ def trig():
 
      return render_template('result.html', result=result)
 
+#this functions as youtube video downloader
 @app.route('/youtube_downloader', methods=['GET', 'POST'])
 def youtube_downloader():
     if request.method == 'POST':
@@ -169,6 +175,7 @@ def youtube_downloader():
 def blog():
     return render_template('blog.html')
 
+#this is for the registration page, here the form validation and length is structured
 class RegisterForm(Form):
     first_name = StringField('First Name', [validators.Length(min=1, max=50)])
     middle_name = StringField('Middle Name', [validators.Length(min=1, max=50)])
