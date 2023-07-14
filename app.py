@@ -1,9 +1,9 @@
 #libraries to be used
-from pytube import YouTube
-from flask import Flask, render_template, flash, redirect, url_for, session, logging, request
+from flask import Flask, render_template, flash, redirect, url_for, session, request
 from flask_mysqldb import MySQL
-from wtforms import Form, StringField, TextAreaField, PasswordField, validators
+from wtforms import Form, StringField, PasswordField, validators
 from passlib.hash import sha256_crypt
+from pytube import YouTube
 import math
 
 app = Flask(__name__)
@@ -11,13 +11,12 @@ app.secret_key = 'Ifedaniel@0704'
 
 #configure MySQL
 app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_USER'] = 'Danielife'
 app.config['MYSQL_PASSWORD'] = 'Ifedaniel@0704'
 app.config['MYSQL_DB'] = 'danielife'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 #init MySQL
-mysql = MySQL(app)
+mysql = MySQL(app, cursorclass='DictCursor')
 
 #route to the index
 @app.route('/')
@@ -167,7 +166,7 @@ def youtube_downloader():
             status = "Download failed."
             print(e)
 
-        return render_template('youtube_downloader.html', status=status, formats=formats)
+        return render_template('youtube_downloader.html', status=status, formats = [] )
 
     return render_template('youtube_downloader.html', formats=[])  # Provide an empty list as the default value
 
@@ -187,7 +186,7 @@ class RegisterForm(Form):
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegisterForm(request.form)
+    form = RegisterForm(request.form, meta={'csrf': False})
     if request.method == 'POST' and form.validate():
         first_name = form.first_name.data
         middle_name = form.middle_name.data
@@ -209,7 +208,7 @@ def register():
 
         flash('You are now registered and can log in', 'Success')
 
-        redirect(url_for('index'))
+        return redirect(url_for('index'))
 
     return render_template('register.html', form=form)
 
