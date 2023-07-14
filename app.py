@@ -14,9 +14,10 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'Danielife'
 app.config['MYSQL_PASSWORD'] = 'Ifedaniel@0704'
 app.config['MYSQL_DB'] = 'danielife'
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 #init MySQL
-mysql = MySQL(app, cursorclass='DictCursor')
+mysql = MySQL(app)
 
 #route to the index
 @app.route('/')
