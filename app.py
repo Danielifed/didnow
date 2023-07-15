@@ -13,7 +13,7 @@ app.secret_key = 'Ifedaniel@0704'
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'Danielife'
 app.config['MYSQL_PASSWORD'] = 'Ifedaniel@0704'
-app.config['MYSQL_DB'] = 'danielife'
+app.config['MYSQL_DB'] = 'didnow'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 #init MySQL
@@ -199,7 +199,7 @@ def register():
         # create cursor
         cur = mysql.connection.cursor()
 
-        cur.execute("INSERT INTO student(first_name, middle_name, last_name,username, email, password) VALUES(%s, %s, %s, %s, %s, %s)", (first_name, middle_name, last_name,username, email, password))
+        cur.execute("INSERT INTO register(first_name, middle_name, last_name,username, email, password) VALUES(%s, %s, %s, %s, %s, %s)", (first_name, middle_name, last_name,username, email, password))
 
         #commit to DB
         mysql.connection.commit()
