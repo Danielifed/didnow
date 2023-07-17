@@ -11,7 +11,7 @@ app.secret_key = 'Ifedaniel@0704'
 
 #configure MySQL
 app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'Danielife'
+app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'Ifedaniel@0704'
 app.config['MYSQL_DB'] = 'didnow'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
