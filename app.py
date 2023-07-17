@@ -7,7 +7,7 @@ from pytube import YouTube
 import math
 
 app = Flask(__name__)
-app.secret_key = 'Ifedaniel@0704'
+app.secret_key = 'Ifedaniel@0704&6561'
 
 #configure MySQL
 app.config['MYSQL_HOST'] = 'aws.connect.psdb.cloud'
