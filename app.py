@@ -26,9 +26,9 @@ def index():
 
 
 #route to the about page
-@app.route('/about')
+@app.route('/portfolio')
 def about():
-    return render_template('about.html')
+    return render_template('portfolio.html')
 
 #route to the calculator section
 @app.route('/calculator')
