@@ -29,14 +29,14 @@ app.register_blueprint(register_app)
 #this is for the registration page, here the form validation and length is structured
 class RegisterForm(Form):
      first_name = StringField('First Name', [validators.Length(min=1, max=50)])
-    middle_name = StringField('Middle Name', [validators.Length(min=1, max=50)])
-    last_name = StringField('Last Name', [validators.Length(min=1, max=50)])
-    username = StringField('Username', [validators.Length(min=4, max=25)])
-    email = StringField('Email', [validators.Length(min=5, max=25)])
-    password = PasswordField('Password', [validators.DataRequired(), validators.EqualTo('confirm', message='Passwords do not match')])
-    confirm = PasswordField('Confirm Password')
+     middle_name = StringField('Middle Name', [validators.Length(min=1, max=50)])
+     last_name = StringField('Last Name', [validators.Length(min=1, max=50)])
+     username = StringField('Username', [validators.Length(min=4, max=25)])
+     email = StringField('Email', [validators.Length(min=5, max=25)])
+     password = PasswordField('Password', [validators.DataRequired(), validators.EqualTo('confirm', message='Passwords do not match')])
+     confirm = PasswordField('Confirm Password')
 
-    pass
+     pass
 
 @app.route('/')
 def index():
