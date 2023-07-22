@@ -1,4 +1,4 @@
-
+from wtforms import Form, StringField, PasswordField, validators
 @app.route('/register', methods=['GET', 'POST'])
 def register():
      form = RegisterForm(request.form, meta={'csrf': False})
