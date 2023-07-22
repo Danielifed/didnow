@@ -138,38 +138,62 @@ def trig():
 @app.route('/youtube_downloader', methods=['GET', 'POST'])
 def youtube_downloader():
     if request.method == 'POST':
-        url = request.form['url']
-        save_path = request.form.get('save_path', 'download_folder')
-        audio_format = request.form.get('audio_format', False)
-        itag = request.form['itag']
+        url = request.form['url'].strip()
+        save_path = "downloads"  # Set the default save path to "downloads"
+
+        if not url:
+            status = "Please provide a valid YouTube URL."
+            return render_template('youtube_downloader.html', status=status)
 
         try:
             youtube = YouTube(url)
-            formats = youtube.streams.filter(file_extension='mp4')
+            video_streams = youtube.streams.filter(file_extension='mp4')
 
-            # Choose the desired format
-            video = youtube.streams.get_by_itag(itag)
+            if not video_streams:
+                status = "No video formats available for download."
+                return render_template('youtube_downloader.html', status=status)
 
-            if video:
-                # Download the video
-                video.download(save_path)
-                status = "Download completed!"
+            available_qualities = list(set([stream.resolution for stream in video_streams]))
 
-                # Convert to MP3 if audio format is requested
-                if audio_format:
-                    mp3_filename = video.default_filename.replace(video.default_filename[-3:], "mp3")
-                    video.streams.get_audio_only().download(save_path, filename=mp3_filename)
-                    status += " (MP3)"
+            if available_qualities:
+                available_qualities.sort(reverse=True)
             else:
-                status = "Format not found."
+                available_qualities = None
+
+            return render_template('youtube_downloader.html', url=url, available_qualities=available_qualities)
 
         except Exception as e:
-            status = "Download failed."
+            status = "Invalid YouTube URL or error fetching video details."
             print(e)
+            return render_template('youtube_downloader.html', status=status)
 
-        return render_template('youtube_downloader.html', status=status, formats = [] )
+    return render_template('youtube_downloader.html', status=None, available_qualities=[])
 
-    return render_template('youtube_downloader.html', formats=[])  # Provide an empty list as the default value
+@app.route('/download', methods=['POST'])
+def download_video():
+    url = request.form['url'].strip()
+    save_path = "downloads"  # Set the default save path to "downloads"
+    quality = request.form['quality']
+
+    try:
+        youtube = YouTube(url)
+        video_stream = youtube.streams.filter(file_extension='mp4', res=quality).first()
+
+        if video_stream:
+            filesize = video_stream.filesize / (1024 * 1024)  # Convert bytes to MB
+            filesize = round(filesize, 2)  # Round to two decimal places
+
+            # Download the video
+            video_stream.download(save_path)
+            status = f"Download completed! (Size: {filesize} MB)"
+        else:
+            status = "Format not found."
+
+    except Exception as e:
+        status = "Download failed."
+        print(e)
+
+    return render_template('youtube_downloader.html', status=status)
 
 @app.route('/blog')
 def blog():
