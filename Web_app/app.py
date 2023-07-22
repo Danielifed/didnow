@@ -1,8 +1,7 @@
 from flask import Flask
 from flask_mysqldb import MySQL
-from forms import RegisterForm
+from forms import register
 from calculator import calculator_app
-from youtube_downloader import youtube_downloader_app
 from blog import blog_app
 from portfolio import portfolio_app
 
