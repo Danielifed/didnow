@@ -15,10 +15,10 @@ app = Flask(__name__)
 
 
 connection = MySQLdb.connect(
-    host=os.getenv("HOST"),
-    user=os.getenv("USERNAME"),
-    passwd=os.getenv("PASSWORD"),
-    db=os.getenv("DATABASE"),
+    host=os.getenv("aws.connect.psdb.cloud"),
+    user=os.getenv("kabs40o0stw00lnppuf9"),
+    passwd=os.getenv("pscale_pw_jdhk7AWWRnHqY0Ugp8xbB9rBUp0DHfjIRWYmhfJvOz8"),
+    db=os.getenv("didnow"),
     autocommit=True,
     ssl_mode="VERIFY_IDENTITY",
     ssl={
