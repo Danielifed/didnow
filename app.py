@@ -5,26 +5,17 @@ from wtforms import Form, StringField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from pytube import YouTube
 import math
-from dotenv import load_dotenv
-load_dotenv()
-
-import os
-import MySQLdb
 
 app = Flask(__name__)
+app.secret_key = 'Ifedaniel@0704'
 
-
-connection = MySQLdb.connect(
-    host=os.getenv("aws.connect.psdb.cloud"),
-    user=os.getenv("kabs40o0stw00lnppuf9"),
-    passwd=os.getenv("pscale_pw_jdhk7AWWRnHqY0Ugp8xbB9rBUp0DHfjIRWYmhfJvOz8"),
-    db=os.getenv("didnow"),
-    autocommit=True,
-    ssl_mode="VERIFY_IDENTITY",
-    ssl={
-        "ca": "/etc/ssl/cert.pem"
-    }
-)
+#configure MySQL
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'Ifedaniel@0704'
+app.config['MYSQL_DB'] = 'danielife'
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+app.config["MYSQL_CUSTOM_OPTIONS"] = {"ssl": {"ca": "/etc/ssl/certs/ca-certificates.crt"}}
 
 #init MySQL
 mysql = MySQL(app)
@@ -190,3 +181,4 @@ def register():
 
 if __name__=='__main__':
     app.run(debug=False)
+
