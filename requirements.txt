@@ -13,3 +13,5 @@ passlib==1.7.4
 pytube==15.0.0
 Werkzeug==2.3.6
 WTForms==3.0.1
+requests==2.26.0
+python-dotenv==1.0.0
