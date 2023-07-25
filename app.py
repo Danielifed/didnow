@@ -7,14 +7,15 @@ from pytube import YouTube
 import math
 
 app = Flask(__name__)
-app.secret_key = 'Ifedaniel@0704&6561'
+app.secret_key = 'Ifedaniel@0704'
 
 #configure MySQL
-app.config['MYSQL_HOST'] = 'aws.connect.psdb.cloud'
-app.config['MYSQL_USER'] = 'e32m5rf7dwc2ekmhtp9x'
-app.config['MYSQL_PASSWORD'] = 'pscale_pw_XXMMmJKrIbjSYlcNOeDXXweaGXLTy4zXVzUtTFtgz9S'
-app.config['MYSQL_DB'] = 'didnow'
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'Ifedaniel@0704'
+app.config['MYSQL_DB'] = 'danielife'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+app.config["MYSQL_CUSTOM_OPTIONS"] = {"ssl": {"ca": "/etc/ssl/certs/ca-certificates.crt"}}
 
 #init MySQL
 mysql = MySQL(app)
