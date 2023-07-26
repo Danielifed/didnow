@@ -20,7 +20,7 @@ app.config["MYSQL_CUSTOM_OPTIONS"] = {"ssl": {"ca": "/etc/ssl/certs/ca-certifica
 #get file from .env
 connection = MySQLdb.connect(
   host=os.getenv("HOST"),
-  user=os.getenv("USER"),
+  user=os.getenv("USERNAME"),
   passwd=os.getenv("PASSWORD"),
   db=os.getenv("DATABASE"),
   autocommit=True,
