@@ -24,7 +24,6 @@ connection = MySQLdb.connect(
     passwd=os.getenv("PASSWORD"),
     db=os.getenv("DATABASE"),
     autocommit=True,
-    ssl={"ca": "/etc/ssl/certs/ca-certificates.crt"}
 )
 
 #init MySQL
