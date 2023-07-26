@@ -16,6 +16,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 #configure MySQL
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+app.config["MYSQL_CUSTOM_OPTIONS"] = {"ssl": {"ca": "/etc/ssl/certs/ca-certificates.crt"}}
 #get file from .env
 connection = MySQLdb.connect(
   host= os.getenv("HOST"),
@@ -23,10 +24,7 @@ connection = MySQLdb.connect(
   passwd= os.getenv("PASSWORD"),
   db= os.getenv("DATABASE"),
   autocommit = True,
-  ssl_mode = "VERIFY_IDENTITY",
-  ssl ={
-        "ca": "/etc/ssl/certs/ca-certificates.crt"
-    }
+  ssl_mode = "VERIFY_IDENTITY"
 )
 
 #init MySQL
