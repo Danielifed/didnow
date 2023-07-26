@@ -24,9 +24,9 @@ connection = MySQLdb.connect(
   db= os.getenv("DATABASE"),
   autocommit = True,
   ssl_mode = "VERIFY_IDENTITY",
-  ssl      = {
-    "ca": "/etc/ssl/cert.pem"
-  }
+  ssl ={
+        "ca": "/etc/ssl/certs/ca-certificates.crt"
+    }
 )
 
 #init MySQL
