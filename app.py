@@ -3,7 +3,6 @@ import os
 from dotenv import load_dotenv
 import mysql.connector
 from flask import Flask, render_template, flash, redirect, url_for, session, request
-from flask_mysqldb import MySQL
 from wtforms import Form, StringField, PasswordField, validators
 from passlib.hash import sha256_crypt
 import math
@@ -16,14 +15,14 @@ app = Flask(__name__)
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.config["MYSQL_CUSTOM_OPTIONS"] = {"ssl": {"ca": "/etc/ssl/certs/ca-certificates.crt"}}
 #get file from .env
-host = os.getenv("HOST")
-user = os.getenv("USERNAME")
-password = os.getenv("PASSWORD")
-database = os.getenv("DATABASE")
+connection = mysql.connector.connect(
+    host = os.environ.get("HOST"),
+    user = os.environ.get("USERNAME"),
+    password = os.environ.get("PASSWORD"),
+    database = os.environ.get("DATABASE"),
+)
 
-mysql = MySQL(app, host=host, user=user, password=password, db=database)
 
-# Route to the index
 
 #init MySQL
 mysql = MySQL(app)
