@@ -17,6 +17,9 @@ connection = mysql.connector.connect(
   passwd= os.getenv("PASSWORD"),
   db= os.getenv("DATABASE"),
   autocommit = True,
+  ssl      = {
+    "ca": "/etc/ssl/cert.pem"
+  }
 )
 
 #configure MySQL
