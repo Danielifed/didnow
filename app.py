@@ -10,10 +10,6 @@ import math
 
 app = Flask(__name__)
 
-
-#configure MySQL
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-app.config["MYSQL_CUSTOM_OPTIONS"] = {"ssl": {"ca": "/etc/ssl/certs/ca-certificates.crt"}}
 #get file from .env
 connection = mysql.connector.connect(
     host= os.getenv("HOST"),
@@ -27,7 +23,8 @@ connection = mysql.connector.connect(
   }
 )
 
-
+#configure MySQL
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 #init MySQL
 mysql = MySQL(app)
