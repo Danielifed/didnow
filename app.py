@@ -16,10 +16,15 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.config["MYSQL_CUSTOM_OPTIONS"] = {"ssl": {"ca": "/etc/ssl/certs/ca-certificates.crt"}}
 #get file from .env
 connection = mysql.connector.connect(
-    host = os.environ.get("HOST"),
-    user = os.environ.get("USERNAME"),
-    password = os.environ.get("PASSWORD"),
-    database = os.environ.get("DATABASE"),
+    host= os.getenv("HOST"),
+  user=os.getenv("USERNAME"),
+  passwd= os.getenv("PASSWORD"),
+  db= os.getenv("DATABASE"),
+  autocommit = True,
+  ssl_mode = "VERIFY_IDENTITY",
+  ssl      = {
+    "ca": "/etc/ssl/cert.pem"
+  }
 )
 
 
