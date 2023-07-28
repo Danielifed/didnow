@@ -1,30 +1,26 @@
 #libraries to be used
-import os
-from dotenv import load_dotenv
-import mysql.connector
 from flask import Flask, render_template, flash, redirect, url_for, session, request
+from flask_mysqldb import MySQL
 from wtforms import Form, StringField, PasswordField, validators
 from passlib.hash import sha256_crypt
+from pytube import YouTube
 import math
-
+from dotenv import load_dotenv
+load_dotenv()
+import os
+import MySQLdb
 
 app = Flask(__name__)
+SECRET_KEY = os.getenv("SECRET_KEY")
 
-#get file from .env
-connection = mysql.connector.connect(
-    host= os.getenv("HOST"),
-  user=os.getenv("USERNAME"),
-  passwd= os.getenv("PASSWORD"),
-  db= os.getenv("DATABASE"),
-  autocommit = True,
-   ssl_mode = "VERIFY_IDENTITY",
-  ssl      = {
-      "ca": "/etc/ssl/certs/ca-certificates.crt"
-  }
-)
 
 #configure MySQL
+app.config['MYSQL_HOST'] = os.getenv("HOST")
+app.config['MYSQL_USER'] = os.getenv("USERNAME")
+app.config['MYSQL_PASSWORD'] = os.getenv("PASSWORD")
+app.config['MYSQL_DB'] = os.getenv("DATABASE")
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+#app.config["MYSQL_CUSTOM_OPTIONS"] = {"ssl": {"ca": "/etc/ssl/certs/ca-certificates.crt"}}
 
 #init MySQL
 mysql = MySQL(app)
