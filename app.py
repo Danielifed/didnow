@@ -1,5 +1,6 @@
 #libraries to be used
 from flask import Flask, render_template, flash, redirect, url_for, session, request
+import mysql.connector
 from flask_mysqldb import MySQL
 from wtforms import Form, StringField, PasswordField, validators
 from passlib.hash import sha256_crypt
