@@ -12,7 +12,6 @@ import os
 import MySQLdb
 
 app = Flask(__name__)
-SECRET_KEY = os.getenv("SECRET_KEY")
 
 
 #configure MySQL
@@ -27,10 +26,9 @@ connection = MySQLdb.connect(
   autocommit = True,
   ssl_mode = "VERIFY_IDENTITY",
   ssl      = {
-    "ca": "/etc/ssl/certs/ca-certificates.crt"
+    "ca": "/etc/ssl/cert.pem"
   }
 )
-
 #init MySQL
 mysql = MySQL(app)
 
