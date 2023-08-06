@@ -5,3 +5,6 @@ The smart calculator provide users with a convenient tool for performing various
 https://didnow.tech/
 https://www.linkedin.com/pulse/smart-calculator-daniel-dibie
 https://www.linkedin.com/feed/
+
+still updating
+
