@@ -165,10 +165,21 @@ def register():
         username = form.username.data
         email = form.email.data
         password = sha256_crypt.encrypt(str(form.password.data))
+
+        ssl_ca_path = "/etc/ssl/cert.pem"  
+        conn = MySQLdb.connect(
+            host=app.config['MYSQL_HOST'],
+            user=app.config['MYSQL_USER'],
+            passwd=app.config['MYSQL_PASSWORD'],
+            db=app.config['MYSQL_DB'],
+            ssl={"ca": ssl_ca_path}
+        )
         
-        with mysql.connection.cursor() as cur:
-            cur.execute("INSERT INTO register(first_name, middle_name, last_name, username, email, password) VALUES(%s, %s, %s, %s, %s, %s)", (first_name, middle_name, last_name, username, email, password))
-            mysql.connection.commit()
+        cur = conn.cursor()
+        cur.execute("INSERT INTO register(first_name, middle_name, last_name, username, email, password) VALUES(%s, %s, %s, %s, %s, %s)", (first_name, middle_name, last_name, username, email, password))
+        conn.commit()
+        cur.close()
+        conn.close()
         flash('You are now registered and can log in', 'Success')
         return redirect(url_for('index'))
 
