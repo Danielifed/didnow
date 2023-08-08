@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 #configure MySQL
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-app.config["MYSQL_CUSTOM_OPTIONS"] = {"ssl": {"ca": "/etc/ssl/certs/ca-certificates.crt"}}
+app.config["MYSQL_CUSTOM_OPTIONS"] = {"ssl": {"ca": "/etc/ssl/cert.pem"}}
 app.config['MYSQL_HOST'] = os.getenv("HOST")
 app.config['MYSQL_USER'] = os.getenv("USERNAME")
 app.config['MYSQL_PASSWORD'] = os.getenv("PASSWORD")
