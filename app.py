@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 #configure MySQL
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-app.config["MYSQL_CUSTOM_OPTIONS"] = {"ssl": {"ca": "/etc/ssl/cert.pem"}}
+app.config["MYSQL_CUSTOM_OPTIONS"] = ssl_ca=os.getenv{"ssl": {"ca": "/etc/ssl/cert.pem"}}
 app.config['MYSQL_HOST'] = os.getenv("HOST")
 app.config['MYSQL_USER'] = os.getenv("USERNAME")
 app.config['MYSQL_PASSWORD'] = os.getenv("PASSWORD")
@@ -165,21 +165,13 @@ def register():
         username = form.username.data
         email = form.email.data
         password = sha256_crypt.encrypt(str(form.password.data))
-
-        # create cursor
-        cur = mysql.connection.cursor()
-
-        cur.execute("INSERT INTO register(first_name, middle_name, last_name,username, email, password) VALUES(%s, %s, %s, %s, %s, %s)", (first_name, middle_name, last_name,username, email, password))
-
-        #commit to DB
-        mysql.connection.commit()
-
-        #close connection
-        cur.close()
-
+        
+        with mysql.connection.cursor() as cur:
+            cur.execute("INSERT INTO register(first_name, middle_name, last_name, username, email, password) VALUES(%s, %s, %s, %s, %s, %s)", (first_name, middle_name, last_name, username, email, password))
+            mysql.connection.commit()
         flash('You are now registered and can log in', 'Success')
-
         return redirect(url_for('index'))
+
 
     return render_template('register.html', form=form)
 
