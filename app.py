@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 #configure MySQL
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-app.config['MYSQL_HOST'] = ' didnowtech.cncqfkr0v2be.us-east-1.rds.amazonaws.com'
+app.config['MYSQL_HOST'] = 'didnowtech.cncqfkr0v2be.us-east-1.rds.amazonaws.com'
 app.config['MYSQL_USER'] = 'admin'
 app.config['MYSQL_PASSWORD'] = 'didnow6561'
 app.config['MYSQL_DB'] = 'didnowtech'
