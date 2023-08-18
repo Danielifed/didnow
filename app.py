@@ -16,12 +16,11 @@ app = Flask(__name__)
 
 #configure MySQL
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-app.config["MYSQL_CUSTOM_OPTIONS"] = {"ssl": {"ca": "/etc/ssl/cert.pem"}}, 
-use_pure=True
-app.config['MYSQL_HOST'] = os.getenv("HOST")
-app.config['MYSQL_USER'] = os.getenv("USERNAME")
-app.config['MYSQL_PASSWORD'] = os.getenv("PASSWORD")
-app.config['MYSQL_DB'] = os.getenv("DATABASE")
+app.config['MYSQL_HOST'] = ' didnowtech.cncqfkr0v2be.us-east-1.rds.amazonaws.com'
+app.config['MYSQL_USER'] = 'admin'
+app.config['MYSQL_PASSWORD'] = 'didnow6561'
+app.config['MYSQL_DB'] = 'didnowtech'
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 #init MySQL
 mysql = MySQL(app)
 
@@ -158,7 +157,7 @@ class RegisterForm(Form):
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegisterForm(request.form, meta={'csrf': False})
+    form = RegisterForm(request.form)
     if request.method == 'POST' and form.validate():
         first_name = form.first_name.data
         middle_name = form.middle_name.data
@@ -167,14 +166,20 @@ def register():
         email = form.email.data
         password = sha256_crypt.encrypt(str(form.password.data))
 
-        
-        cursor = mysql.connection.cursor()
-        cursor.execute("INSERT INTO register(first_name, middle_name, last_name, username, email, password) VALUES(%s, %s, %s, %s, %s, %s)", (first_name, middle_name, last_name, username, email, password))
-        mysql.connection.commit()
-        cursor.close()
-        flash('You are now registered and can log in', 'Success')
-        return redirect(url_for('index'))
+        # create cursor
+        cur = mysql.connection.cursor()
 
+        cur.execute("INSERT INTO register (first_name, middle_name, last_name,username, email, password) VALUES(%s, %s, %s, %s, %s, %s)", (first_name, middle_name, last_name,username, email, password))
+
+        #commit to DB
+        mysql.connection.commit()
+
+        #close connection
+        cur.close()
+
+        flash('You are now registered and can log in', 'Success')
+
+        redirect(url_for('index'))
 
     return render_template('register.html', form=form)
 
