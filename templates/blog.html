@@ -1,18 +1,84 @@
-{% extends 'layout.html' %} 
+{% extends 'layout.html' %} {% block body %}
+<div class="jumbotron text-center">
+	<h1>Welcome to Didnow blog</h1>
+	<p class="lead">This is the blog section of Didnow Tech.</p>
+</div>
 
-{% block body %} 
- <div class="jumbotron text-center">
-    <h1>Welcome to Didnow blog</h1>
-    <p class="lead">This is the blog section of Didnow Tech.</p>
- </div> 
+<section class="section" id="blog">
+	<div class="container">
+		<h2 class="mb-5"><span class="text-danger">Nature</span></h2>
+		<div class="row">
+			<!-- blog-card -->
+			<div class="blog-card">
+				<div class="img-holder">
+					<img src="{{ user_image }}" alt="anything" />
+				</div>
+				<div class="content-holder">
+					<h2 class="title"><b>Wetland</b></h2>
 
- <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-MJ92P4GGDB"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+					<p class="post-details">
+                  By: <b style="color: blue;">Daniel, Ifechukwude Dibie</b>
+               </p>
+<br>
+					<p>
+                  <h2>Introduction</h2>
+						Wetlands, which are natural ecosystems formed by interaction of land and water systems, with multiple ecological functions, are referred to as the “kidney of the Earth”. Wetlands are an ideal habitat for many plants and animals, such as waterfowl, effectively providing a water source, controlling flooding and preventing soil desertification, as well as acting as a carbon sink, storing carbon and therefore reducing the greenhouse effect (Zhang et al., 2017).
+					</p>
+               <p>
+                  A wetland is a distinct ecosystem that is inundated by water, either permanently or seasonally, where oxygen-free processes prevail. The primary factor that distinguishes wetlands from other land forms or water bodies is the characteristic vegetation of aquatic plants, adapted to the unique hydric soil. Wetlands play a number of roles, sometimes referred to as functions. Among these are water purification, water storage, processing of carbon and other nutrients, stabilization of shorelines, and support of plants and animals (Fagorite et al ., 2019).
+               </p>
+               <a href="#" class="read-more">Read more <i class="ti-angle-double-right"></i></a>
 
-  gtag('config', 'G-MJ92P4GGDB');
-</script>
+					<div class="full-write-up" style="display: none;">
+                  <p>Wetlands are also considered the most biologically diverse of all ecosystems, serving as home to a wide range of plant and animal life. Whether any individual wetland performs these functions, and the degree to which it performs them, depends on characteristics of that wetland and the lands and waters near it. Methods (tools) for rapidly assessing these functions, wetland ecological health, and general wetland condition have been developed in many regions and have contributed to wetland conservation partly by raising public awareness of the functions and the ecosystem services some wetlands provide.</p>
+                  <p>The cleansing of water has always occurred through natural processes as the water flows through rivers, lakes, streams, and wetlands, and in the last several decades, systems have been constructed to use some of these processes for water quality improvement (Thorslund et al., 2017). Wetlands are now highly preferred as systems for improving the quality of point and nonpoint sources of water pollution, including stormwater runoff, domestic wastewater, agricultural wastewater, as well as coal mine drainage.</p>
+                  <h3>Wetlands as functional systems</h3>
+                  <p>Wetlands are ecotones/transitional areas between land and water, with indistinct boundaries between the wetland area and uplands or deep water. The definition expansion of the term wetland covers a broad range of systems that range from marshes, bogs, swamps, wet meadows, tidal wetlands, floodplains, and ribbon (riparian) zones along stream channels. However, all wetlands, whether they are natural or artificial, freshwater, or salty, pose a single characteristic or numerous characteristics, and they occur within the surface or near-surface water, whether they are permanently or temporarily submerged under water (Miesiak-wojcik et al., 2018). In most wetlands, hydrologic conditions are such that the substrate is saturated long enough during the growing season, a mechanism that creates oxygen-poor conditions in the substrate, limiting the vegetation to those species that are adapted to low-oxygen environments (Omondi and Navalia, 2021). Wetlands provide a number of functions and benefits.</p>
+                  <p>Wetland functions are inherent processes occurring in wetlands; wetland values are the attributes of wetlands that society perceives as beneficial. The wetland hydrology is generally one of slow flows with either shallow waters or saturated substrates, which allows sediments and other pollutants, including emerging contaminants to settle as the water passes through the wetland system. The occurrence of slow flows provides prolonged contact times between the water and the surfaces within the wetland. The wetland treatment mechanisms are anchored on the complex mass of organic and inorganic materials, with diverse opportunities for gas/water interchanges, which foster a diverse community of microorganisms that break down or transform a wide variety of substances (Thorslund et al., 2017). Within the wetland’s ecosystems, there are dense growths of vascular plants adapted to saturated conditions, which slow the water, create microenvironments within the water column, and provide attachment sites for the microbial communities as well as other contaminants. The litter that accumulates as plants die back in the fall creates additional material and exchange sites and provides a source of carbon, nitrogen, and phosphorous to fuel microbial processes (Ge et al., 2020).</p>
+                  <p>Even though, not all wetlands can perform all functions and values, majority of them provide several benefits. When subjected to appropriate ecological management without any threats, majority of wetlands can provide the following:
+                  <li>
+                     <ol>Water quality services</ol>
+                     <ol>Flood storage services under excessive precipitation and the desynchronization of storm</ol>
+                  </li>
+                  <h2>Reference</h2>
+                  <li>
+                     <ol>
+                        Abou-Elela, S. I. (2017). Wetlands: the green technology for municipal wastewater treatment and reuse in agriculture. In: Negm A, editor. Unconventional Water Resources and Agriculture in Egypt. The Handbook of Environmental Chemistry. Cham: Springer 17.
+                     </ol>
+                     <ol>
+                        Davidson, N.C. (2014). How much wetland has the world lost? Long-term and recent trends in global wetland area”. Marine and Freshwater Research. 65 (10): 934−941
+                     </ol>
+                     <ol>
+                        Donde, O. O. (2017). Wastewater management techniques: A review of advancement on the appropriate wastewater treatment principles for sustainability. Environmental Management and Sustainable Development. 6(1): 40-58.
+                     </ol>
+                     <ol>
+                        Zhang, Y., Chu, C., Liu, L., Xu, S., Ruan, X., & Ju, M. (2017). Water Environment Assessment as an Ecological Red Line Management Tool for Marine Wetland Protection. International Journal Of Environmental Research And Public Health, 14(8): 870 – 886
+                     </ol>
+                  </li>
+            <script>// Get all the "Read More" links
+               const readMoreLinks = document.querySelectorAll(".read-more");
+               // Add a click event listener to each "Read More" link
+               readMoreLinks.forEach((link) => {
+                  link.addEventListener("click", function (event) {
+                     event.preventDefault(); // Prevent the default link behavior
+                     
+                     // Find the associated full write-up container
+                     const fullWriteUp = this.nextElementSibling; // Fix the typo here
+                     
+                     // Toggle the visibility of the full write-up container
+                     if (fullWriteUp.style.display === "none" || fullWriteUp.style.display === "") {
+                        fullWriteUp.style.display = "block";
+                     } else {
+                        fullWriteUp.style.display = "none";
+                     }
+                  });
+               });
+            </script>
+               </div>
+				</div>
+			</div>
+			<!-- end of blog wrapper -->
+		</div>
+	</div>
+</section>
 {% endblock %}

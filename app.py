@@ -12,6 +12,8 @@ import os
 import MySQLdb
 
 app = Flask(__name__)
+picFolder = os.path.join('static', 'img')
+app.config['UPLOAD_FOLDER'] = picFolder
 
 
 #configure MySQL
@@ -143,7 +145,8 @@ def trig():
 
 @app.route('/blog')
 def blog():
-    return render_template('blog.html')
+    wetland = os.path.join(app.config['UPLOAD_FOLDER'], 'wetland.png')
+    return render_template('blog.html', user_image = wetland )
 
 #this is for the registration page, here the form validation and length is structured
 class RegisterForm(Form):
