@@ -17,12 +17,12 @@ app.config['UPLOAD_FOLDER'] = picFolder
 
 
 #configure MySQL
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+
 app.config['MYSQL_HOST'] = 'didnowtech.cncqfkr0v2be.us-east-1.rds.amazonaws.com'
-app.config['MYSQL_USER'] = 'admin'
-app.config['MYSQL_PASSWORD'] = 'didnow6561'
+app.config['MYSQL_USER'] = 'didnow'
+app.config['MYSQL_PASSWORD'] = 'Ifedaniel6561'
 app.config['MYSQL_DB'] = 'didnowtech'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+
 #init MySQL
 mysql = MySQL(app)
 
@@ -141,7 +141,7 @@ def trig():
 
      return render_template('result.html', result=result)
 
-#this functions as youtube video downloader
+
 
 @app.route('/blog')
 def blog():
@@ -169,16 +169,17 @@ def register():
         email = form.email.data
         password = sha256_crypt.encrypt(str(form.password.data))
 
-        # create cursor
-        cur = mysql.connection.cursor()
+        
+        #Creating a connection cursor
+        cursor = mysql.connection.cursor()
 
-        cur.execute("INSERT INTO register (first_name, middle_name, last_name,username, email, password) VALUES(%s, %s, %s, %s, %s, %s)", (first_name, middle_name, last_name,username, email, password))
+        cursor.execute("INSERT INTO register (first_name, middle_name, last_name,username, email, password) VALUES(%s, %s, %s, %s, %s, %s)", (first_name, middle_name, last_name,username, email, password))
 
         #commit to DB
         mysql.connection.commit()
 
         #close connection
-        cur.close()
+        cursor.close()
 
         flash('You are now registered and can log in', 'Success')
 
