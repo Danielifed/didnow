@@ -19,7 +19,7 @@ app.config['UPLOAD_FOLDER'] = picFolder
 #configure MySQL
 
 app.config['MYSQL_HOST'] = 'didnow.cncqfkr0v2be.us-east-1.rds.amazonaws.com'
-app.config['MYSQL_USER'] = 'didnow'
+app.config['MYSQL_USER'] = 'didnowtech'
 app.config['MYSQL_PASSWORD'] = 'Ifedaniel6561'
 app.config['MYSQL_DB'] = 'didnow'
 
